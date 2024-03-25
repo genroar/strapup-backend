@@ -46,9 +46,6 @@ const getUserById = async (id) => {
   return  await User.findById(id);
 };
 
-
-
-
 /**
  * Get user by email
  * @param {string} email
