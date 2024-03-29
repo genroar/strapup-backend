@@ -18,7 +18,6 @@ const createBrand = async (brandBody) => {
     let imageUrl = null; // Initialize imageUrl variable
     console.log("brbody ", brandBody);
 
-    let imageUrl = null; 
 
     try {
       imageUrl = await cloudinaryService.uploadImage(brandBody.image, { folder: 'brands' });
@@ -44,7 +43,7 @@ const queryBrands = async (filter, options) => {
 const getBrandById = async (id) => {
   return Brand.findById(id);
 // Update Brand 
-
+}
 const updateBrand = async (id, updateBody) => {
   try {
     const brand = await Brand.findById(id);
@@ -71,22 +70,15 @@ const updateBrand = async (id, updateBody) => {
   }
 };
 
-const updateBrandById = async (brandId, updateBody) => {
-  const brand = await getBrandById(brandId);
-// Delete Brand
+
 
 const deleteBrand = async (id) => {
   const brand = await Brand.findById(id);
   if (!brand) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Brand not found');
   }
-  if (updateBody.name && (await Brand.isBrandTaken(updateBody.name, brandId))) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Brand name already Registered');
-  }
-  Object.assign(brand, updateBody);
-  await brand.save();
-  return brand;
   await brand.remove();
+  return {'message':"Deleted Succesfully"}
 };
 
 
@@ -94,7 +86,7 @@ const deleteBrand = async (id) => {
 module.exports = {
   createBrand,
   queryBrands,
-  updateBrandById,
   updateBrand,
-  deleteBrand
+  deleteBrand,
+  getBrandById
 };
