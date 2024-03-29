@@ -21,6 +21,7 @@ const modelSchema = mongoose.Schema(
     },
     model: {
       type: [mongoose.Types.ObjectId],
+      ref:'Brand',
       default:[]
     },
 

@@ -1,8 +1,7 @@
 const httpStatus = require('http-status');
-const { brandService } = require('../services');
+//const { brandService } = require('../services');
 const catchAsync = require('../utils/catchAsync');
 const pick = require('../utils/pick');
-const httpStatus = require('http-status'); 
 const brandService = require('../services/brand.service');
 
 
@@ -58,7 +57,6 @@ const deleteBrand = async (req, res, next) => {
 module.exports = {
   createBrand,
   getBrands,
-  updateUser,
   updateBrand,
   deleteBrand
 };

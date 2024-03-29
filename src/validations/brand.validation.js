@@ -19,33 +19,34 @@ const getBrands = {
     page: Joi.number().integer(),
   }),
 };
-const deleteModel = Joi.object({
+
+
+const deleteBrand = Joi.object({
   params: Joi.object({
     id: Joi.string().required()
   })
 });
 
+
+
 const updateBrand = {
   params: Joi.object().keys({
-    brandId: Joi.required().custom(objectId),
-const updateModel = Joi.object({
-  params: Joi.object({
-    id: Joi.string().required()
-  }),
+    id: Joi.required().custom(objectId),
+
   body: Joi.object()
     .keys({
       name: Joi.string(),
       active: Joi.bool(),
     })
     .min(1),
-};
+})};
 
 module.exports = {
   createBrand,
   getBrands,
   updateBrand,
-  deleteModel,
-  updateModel
+  deleteBrand
+
 };
 
 

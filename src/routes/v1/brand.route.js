@@ -28,7 +28,7 @@ router
 router
   .route('/')
   .post(upload.single('image'),validate(brandValidation.createBrand), brandController.createBrand)
- // .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers);
+  .get(auth('getBrands'), validate(brandValidation.getBrands), brandController.getBrands);
  router
  .route('/:id')
  .put(upload.single('image'),validate(brandValidation.updateBrand), brandController.updateBrand)

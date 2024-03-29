@@ -6,7 +6,6 @@ const ApiError = require('../utils/ApiError');
 const validate = (schema) => (req, res, next) => {
   // Update the schema to include 'multipart/form-data' fields
   const validSchema = pick(schema, ['params', 'query', 'body', 'files']);
-  console.log("requseta",req.body,req.file);
   // Pick relevant fields from the request object
   const object = pick(req, Object.keys(validSchema));
   
