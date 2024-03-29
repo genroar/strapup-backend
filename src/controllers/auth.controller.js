@@ -1,18 +1,34 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { authService, userService, tokenService, emailService } = require('../services');
+const translation = require('../static/translation.json')
 
 const register = catchAsync(async (req, res) => {
+  const language = req.language;
   const user = await userService.createUser(req.body);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.status(httpStatus.CREATED).send({ user, tokens });
+
+  const responseData = {
+    data: { user, tokens },
+    message: translation[language]['hello'],
+    status: 200
+  };
+
+  res.status(httpStatus.CREATED).send({ responseData });
 });
 
 const login = catchAsync(async (req, res) => {
+  const language = req.language;
   const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.send({ user, tokens });
+  const responseData = {
+    data: { user, tokens },
+    message: translation[language]['hello'],
+    status: 200
+  };
+
+  res.send({ responseData });
 });
 
 const logout = catchAsync(async (req, res) => {

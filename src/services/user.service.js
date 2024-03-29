@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { User } = require('../models');
 const ApiError = require('../utils/ApiError');
+const {translation} = require('../static/translation.json')
 
 /**
  * Create a user
@@ -33,10 +34,17 @@ const queryUsers = async (filter, options) => {
  * @param {ObjectId} id
  * @returns {Promise<User>}
  */
-const getUserById = async (id) => {
-  return User.findById(id);
-};
 
+// const getUserById = async (id) => {
+//   return User.findById(id);
+// };
+
+
+
+
+const getUserById = async (id) => {
+  return  await User.findById(id);
+};
 /**
  * Get user by email
  * @param {string} email
