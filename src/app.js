@@ -63,16 +63,5 @@ app.use(errorConverter);
 
 // handle error
 app.use(errorHandler);
-// const path = require('path');
-// const {I18n} = require('i18n');
-// const i18n = new i18n({
-//   locals : ['en', 'ar'],
-//   directory: path.join(__dirname, 'static'),
-//   defaultLocale: 'en'
-// })
-
-// app.use(i18n.init);
-
-
 
 module.exports = app;

@@ -1,4 +1,7 @@
-const cloudinary = require('../config/cloudinaryConfig');
+const cloudinary = require("../config/cloudinaryConfig");
+
+
+
 
 const uploadImage = async (imageFile, options) => {
   try {
@@ -10,5 +13,5 @@ const uploadImage = async (imageFile, options) => {
 };
 
 module.exports = {
-  uploadImage,
+  uploadImage
 };

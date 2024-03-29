@@ -1,30 +1,38 @@
 const express = require('express');
-const multer = require('multer');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const brandValidation = require('../../validations/brand.validation');
 const brandController = require('../../controllers/brand.controller');
+const multer =require('multer')
 
 const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, 'uploads/'); // Specify the destination directory for uploaded files
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/') // Specify the destination directory for uploaded files
   },
-  filename(req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`); // Define the filename for uploaded files
-  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname) // Define the filename for uploaded files
+  }
 });
 
 // Create a Multer instance with the configured storage options
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
 const router = express.Router();
 
+
+
+router
+  .route
+
+
 router
   .route('/')
-  .post(auth('manageBrands'), upload.single('image'), validate(brandValidation.createBrand), brandController.createBrand)
-  .get(validate(brandValidation.getBrands), brandController.getBrands);
-
-router.route('/:brandId').patch(validate(brandValidation.updateBrand), brandController.updateUser);
+  .post(upload.single('image'),validate(brandValidation.createBrand), brandController.createBrand)
+ // .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers);
+ router
+ .route('/:id')
+ .put(upload.single('image'),validate(brandValidation.updateBrand), brandController.updateBrand)
+ .delete(validate(brandValidation.deleteBrand),brandController.deleteBrand);
 
 module.exports = router;
 
