@@ -32,6 +32,13 @@ const modelSchema = mongoose.Schema(
 );
 
 
+modelSchema.plugin(toJSON);
+modelSchema.plugin(paginate);
+
+modelSchema.statics.isModelTaken = async function (model, excludeUserId) {
+  const models = await this.findOne({ model, _id: { $ne: excludeUserId } });
+  return !!models;
+};
 
 /**
  * @typedef Model
