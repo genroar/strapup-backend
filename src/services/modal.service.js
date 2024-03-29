@@ -35,10 +35,11 @@ const createModel = async (modelBody) => {
 
 // Get Model
 
-const getModels = async () => {
-  const models = await Model.find();
+const getModels = async (filter, options) => {
+  const models = await Model.paginate(filter, options);
   return models;
 };
+
 
 // Get Model By id
 

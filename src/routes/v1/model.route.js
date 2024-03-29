@@ -27,7 +27,7 @@ router
 router
   .route('/')
   .post(upload.single('image'),validate(modelValidation.createModel), modelController.createModel)
-  .get(validate(modelValidation.getModels),modelController.getModels)
+  .get(auth('getModels'), validate(modelValidation.getModels),modelController.getModels)
  
  router
  .route('/:id')

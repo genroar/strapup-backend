@@ -1,5 +1,7 @@
 const httpStatus = require('http-status'); 
 const modelService = require('../services/modal.service');
+const catchAsync = require('../utils/catchAsync');
+const pick = require('../utils/pick');
 
 const createModel = async (req, res, next) => {
   try {
@@ -14,15 +16,15 @@ const createModel = async (req, res, next) => {
   }
 };
 
+
+
 // Get Models
-const getModels = async (req, res, next) => {
-  try {
-    const models = await modelService.getModels();
-    res.status(httpStatus.OK).send(models);
-  } catch (error) {
-    next(error);
-  }
-};
+const getModels = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['name', 'active']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await modelService.getModels(filter, options);
+  res.send(result);
+});
 
 // Get Model by ID
 const getModelById = async (req, res, next) => {

@@ -12,8 +12,11 @@ const createModel = {
 // Get Model
 const getModels = {
   query: Joi.object().keys({
-    page: Joi.number().integer().min(1),
-    limit: Joi.number().integer().min(1).max(100),
+    name: Joi.string(),
+    active: Joi.boolean(),
+    sortBy: Joi.string(),
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
   }),
 };
 
