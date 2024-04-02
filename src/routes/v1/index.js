@@ -3,6 +3,9 @@ const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const brandRoute = require('./brand.route');
 const modelRoute = require('./model.route');
+const yearsRoute = require('./year.route');
+const generalRoute = require('./general.route');
+const watchRoute = require('./watch.route');
 
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -25,6 +28,18 @@ const defaultRoutes = [
   {
     path: '/models',
     route: modelRoute,
+  },
+  {
+    path: '/years',
+    route: yearsRoute,
+  },
+  {
+    path: '',
+    route: generalRoute,
+  },
+  {
+    path: '/watches',
+    route: watchRoute,
   },
 ];
 

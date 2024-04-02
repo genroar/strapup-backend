@@ -19,12 +19,10 @@ const modelSchema = mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    model: {
-      type: [mongoose.Types.ObjectId],
-      ref:'Brand',
-      default:[]
+    brand: {
+      type: mongoose.Types.ObjectId,
+      ref:'Brand'
     },
-
   },
   {
     timestamps: true,

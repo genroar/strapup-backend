@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { Model } = require('../models');
+const Model  = require('../models/model.model');
 const ApiError = require('../utils/ApiError');
 const cloudinaryService = require('./cloudinaryService');
 
@@ -13,18 +13,18 @@ const createModel = async (modelBody) => {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Model Name Already taken');
     }
 
-    let imageUrl = null; 
+    let imageUrls = null; 
 
     try {
-      imageUrl = await cloudinaryService.uploadImage(modelBody.image, { folder: 'models' });
-      console.log("imageurl", imageUrl);
+      imageUrls = await cloudinaryService.uploadImage(modelBody.image, { folder: 'models' });
+      console.log("imageurl", imageUrls);
     } catch (error) {
       console.error("Error uploading image:", error);
       throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Error uploading image', error);
     }
 
     // Create Model
-    const modelData = { ...modelBody, image: imageUrl };
+    const modelData = { ...modelBody, image: imageUrls };
     return Model.create(modelData);
   } catch (error) {
     console.error("Error creating model:", error);

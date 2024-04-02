@@ -4,3 +4,5 @@ module.exports.tokenService = require('./token.service');
 module.exports.userService = require('./user.service');
 module.exports.brandService = require('./brand.service');
 module.exports.brandService = require('./modal.service');
+module.exports.brandService = require('./years.service');
+module.exports.brandService = require('./watch.service');
