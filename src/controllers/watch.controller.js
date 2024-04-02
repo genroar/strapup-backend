@@ -64,8 +64,8 @@ const getAllWatches = catchAsync(async (req, res) => {
 const getWatchById = catchAsync(async (req, res) => {
   const watch = await watchService.getWatchById(req.params.id);
   if (!watch) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Watch not found');
-  }
+    return res.status(httpStatus.NOT_FOUND).send({ error: 'Watch not found' });
+  } 
   res.send(watch);
 });
 

@@ -12,7 +12,6 @@ router.route('/original-box-papers').get(generalController.OriginalBoxPapers);
 router.route('/price-type').get(generalController.PriceType);
 router.route('/currency').get(generalController.Currency);
 router.route('/get-flags-data').get(generalController.getAllFlags);
-// router.route('/get-flags-data').get(generalController.getAllCountry);
 
 
 module.exports = router;
