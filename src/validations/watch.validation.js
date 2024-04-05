@@ -20,6 +20,11 @@ const watchesSchema = Joi.object({
   price: Joi.number().min(0).required(),
   currency: Joi.string().required(),
   active: Joi.boolean().default(true),
+  adType: Joi.string().valid('ad', 'consign', 'source').required(),
+  email: Joi.string().email().allow(''),
+  phoneNumber: Joi.string().allow(''),
+  createdAt: Joi.date(),
+  updatedAt: Joi.date(),
 });
 
 const watchSchema = (req, res, next) => {

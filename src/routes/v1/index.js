@@ -6,6 +6,8 @@ const modelRoute = require('./model.route');
 const yearsRoute = require('./year.route');
 const generalRoute = require('./general.route');
 const watchRoute = require('./watch.route');
+const offerRoute = require('./offer.route');
+const blogRoute = require('./blog.route');
 
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -41,6 +43,14 @@ const defaultRoutes = [
     path: '/watches',
     route: watchRoute,
   },
+  {
+    path: '/offers',
+    route: offerRoute,
+  },
+  {
+    path: '/blogs',
+    route: blogRoute,
+  }
 ];
 
 const devRoutes = [

@@ -15,7 +15,7 @@ const createBrand = async (brandBody) => {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Brand Name Already taken');
     }
 
-    let imageUrl = null; // Initialize imageUrl variable
+    let imageUrl = null; 
     console.log("brbody ", brandBody);
 
 

@@ -6,8 +6,8 @@ const { userService } = require('../services');
 const translation = require('../static/translation.json')
 
 const createUser = catchAsync(async (req, res) => {
-  const language = req.language;
   const user = await userService.createUser(req.body);
+  const language = req.language;
   const response = {
       message: translation[language]['hello'],
       status: 200,

@@ -19,7 +19,12 @@ const watchSchema = mongoose.Schema(
     country: { type: String, required: true },
     price: { type: Number, required: true },
     currency: { type: String, required: true },
-    active: { type: Boolean, default: true }
+    active: { type: Boolean, default: true },
+    adType: { type: String, enum: ['ad', 'consign', 'source'] },
+    email: { type: String },
+    phoneNumber: { type: String },
+    createdAt: { type: Date },
+    updatedAt: { type: Date }
   },
   {
     timestamps: true,

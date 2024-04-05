@@ -87,6 +87,11 @@ const getAllWatches = async () => {
   return Watch.find();
 };
 
+// Get List Watches
+const getAllListWatches = async (query, options) => {
+  return Watch.find(query).sort(options.sortBy).limit(options.limit).skip(options.limit * (options.page - 1));
+};
+
 // Get Watch By id
 
 const getWatchById = async (id) => {
@@ -105,5 +110,6 @@ module.exports = {
   getAllWatches,
   getWatchById,
   deleteWatch,
+  getAllListWatches,
   updateWatch
 };

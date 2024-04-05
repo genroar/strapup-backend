@@ -4,6 +4,7 @@ const validate = require('../../middlewares/validate');
 const modelValidation = require('../../validations/model.validation');
 const modelController = require('../../controllers/model.controller');
 const multer =require('multer')
+const language = require('../../middlewares/language');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -26,13 +27,13 @@ router
 
 router
   .route('/')
-  .post(upload.single('image'),validate(modelValidation.createModel), modelController.createModel)
-  .get(auth('getModels'), validate(modelValidation.getModels),modelController.getModels)
+  .post(auth('manageModel'),language,upload.single('image'),validate(modelValidation.createModel), modelController.createModel)
+  .get(auth('getModel'), language, validate(modelValidation.getModels),modelController.getModels)
  
  router
  .route('/:id')
- .get(validate(modelValidation.getModelById), modelController.getModelById)
- .put(upload.single('image'),validate(modelValidation.updateModel), modelController.updateModel)
- .delete(validate(modelValidation.deleteModel), modelController.deleteModel);
+ .get(auth('getModel'),language,validate(modelValidation.getModelById), modelController.getModelById)
+ .put(auth('manageModel'),language,upload.single('image'),validate(modelValidation.updateModel), modelController.updateModel)
+ .delete(auth('manageModel'),validate(modelValidation.deleteModel), modelController.deleteModel);
 
 module.exports = router;

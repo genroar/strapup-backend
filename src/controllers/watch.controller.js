@@ -2,6 +2,7 @@ const httpStatus = require('http-status');
 const watchService = require('../services/watch.service');
 const catchAsync = require('../utils/catchAsync');
 const pick = require('../utils/pick');
+const translation = require('../static/translation.json')
 
 // Create Watch
 const createWatch = async (req, res, next) => {
@@ -22,7 +23,13 @@ const createWatch = async (req, res, next) => {
       photos: photos,
       featuredImage: featuredImage
     });
-    res.status(httpStatus.CREATED).send(watch);
+    const language = req.language;
+    const response = {
+        message: translation[language]['hello'],
+        status: 200,
+       data:watch
+    }
+    res.status(httpStatus.CREATED).send(response);
   } catch (error) {
     next(error);
   }
@@ -43,7 +50,13 @@ const updateWatch = async (req, res, next) => {
     }
 
     const watch = await watchService.updateWatch(req.params.id, watchData);
-    res.status(httpStatus.OK).send(watch);
+    const language = req.language;
+    const response = {
+        message: translation[language]['hello'],
+        status: 200,
+       data:watch
+    }
+    res.status(httpStatus.OK).send(response);
   } catch (error) {
     next(error);
   }
@@ -53,10 +66,44 @@ const updateWatch = async (req, res, next) => {
 // Get All Watch
 
 const getAllWatches = catchAsync(async (req, res) => {
-  const watches = await watchService.getAllWatches();
-  res.send(watches);
+  const language = req.language;
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const watches = await watchService.getAllWatches(options);
+  const response = {
+    message: translation[language]['hello'],
+    status: 200,
+    data:watches
+}
+  res.send(response);
 });
 
+// Get List Watches
+// Get All Watch
+const getAllListWatches = catchAsync(async (req, res) => {
+  const { brand, model, year, condition, price, country, orderBy, search, adType } = req.query;
+  
+  // Construct query based on provided parameters
+  const query = {};
+  if (brand) query.brand = brand;
+  if (model) query.model = model;
+  if (year) query.year = year;
+  if (condition) query.condition = condition;
+  if (price) query.price = price;
+  if (country) query.country = country;
+  if (adType) query.adType = adType;
+
+  const options = pick(req.query, ['sortBy', 'limit', 'page']); // Assuming you have a function called 'pick' that extracts specific fields from an object
+  
+  const watches = await watchService.getAllListWatches(query, options);
+  const language = req.language;
+    const response = {
+        message: translation[language]['hello'],
+        status: 200,
+       data:watches
+    }
+    res.status(httpStatus.OK).send(response);
+  res.send(watches);
+});
 
 // Get Watch By Id
 
@@ -66,6 +113,13 @@ const getWatchById = catchAsync(async (req, res) => {
   if (!watch) {
     return res.status(httpStatus.NOT_FOUND).send({ error: 'Watch not found' });
   } 
+  const language = req.language;
+    const response = {
+        message: translation[language]['hello'],
+        status: 200,
+       data:watch
+    }
+    res.status(httpStatus.OK).send(response);
   res.send(watch);
 });
 
@@ -83,5 +137,6 @@ module.exports = {
   getAllWatches,
   getWatchById,
   deleteWatch,
+  getAllListWatches,
   updateWatch
 };

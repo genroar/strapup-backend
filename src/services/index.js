@@ -6,3 +6,5 @@ module.exports.brandService = require('./brand.service');
 module.exports.brandService = require('./modal.service');
 module.exports.brandService = require('./years.service');
 module.exports.brandService = require('./watch.service');
+module.exports.brandService = require('./offer.service');
+module.exports.brandService = require('./blog.service');

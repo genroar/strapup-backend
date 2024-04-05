@@ -4,6 +4,7 @@ const validate = require('../../middlewares/validate');
 const watchController = require('../../controllers/watch.controller');
 const multer = require('multer');
 const watchValidation = require('../../validations/watch.validation');
+const language = require('../../middlewares/language');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -18,14 +19,16 @@ const upload = multer({ storage: storage });
 
 const router = express.Router();
 
+router.route('/list').get(language,watchController.getAllListWatches)
+
 router.route('/')
-.post(upload.fields([{ name: 'photos', maxCount: 10 }, { name: 'featuredImage', maxCount: 1 }]), validate(watchValidation.watchSchema), watchController.createWatch)
-.get(watchController.getAllWatches);
+.post(auth('createWatch'),language, upload.fields([{ name: 'photos', maxCount: 10 }, { name: 'featuredImage', maxCount: 1 }]), validate(watchValidation.watchSchema), watchController.createWatch)
+.get(language,watchController.getAllWatches);
 
 router.route('/:id')
-.get(watchController.getWatchById)
-.put(upload.fields([{ name: 'photos', maxCount: 10 }, { name: 'featuredImage', maxCount: 1 }]), validate(watchValidation.watchSchema), watchController.updateWatch)
-.delete(watchController.deleteWatch);
+.get(language, watchController.getWatchById)
+.put(language, upload.fields([{ name: 'photos', maxCount: 10 }, { name: 'featuredImage', maxCount: 1 }]), validate(watchValidation.watchSchema), watchController.updateWatch)
+.delete(language, watchController.deleteWatch);
 
 
 module.exports = router;
