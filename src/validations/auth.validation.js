@@ -7,6 +7,14 @@ const register = {
     password: Joi.string().required().custom(password),
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
+    phone: Joi.string().required(),
+  Address: Joi.object({
+    Country: Joi.string().required(),
+    City: Joi.string().required(),
+    Address: Joi.string().required(),
+    Street: Joi.string().required()
+  }).required(),
+  role: Joi.string().required().valid('user', 'admin')
   }),
 };
 

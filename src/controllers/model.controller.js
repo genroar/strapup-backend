@@ -10,7 +10,7 @@ const createModel = async (req, res, next) => {
   try {
     const model = await modelService.createModel({
       ...req.body,
-      'image': req.file.path // Use the path of the uploaded file
+      'image': req.file.path 
     });
     const language = req.language;
     const response = {

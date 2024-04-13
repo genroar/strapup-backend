@@ -6,3 +6,4 @@ module.exports.Model = require('./year.model');
 module.exports.Model = require('./watch.model');
 module.exports.Model = require('./offer.model');
 module.exports.Model = require('./blog.model');
+module.exports.Model = require('./notification.model');

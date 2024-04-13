@@ -8,6 +8,7 @@ const generalRoute = require('./general.route');
 const watchRoute = require('./watch.route');
 const offerRoute = require('./offer.route');
 const blogRoute = require('./blog.route');
+const notificationRoute = require('./notification.route');
 
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -50,6 +51,10 @@ const defaultRoutes = [
   {
     path: '/blogs',
     route: blogRoute,
+  },
+  {
+    path: '/notifications',
+    route: notificationRoute,
   }
 ];
 

@@ -15,7 +15,6 @@ const register = catchAsync(async (req, res) => {
   };
 
   res.status(httpStatus.CREATED).send({ responseData });
-  res.status(httpStatus.CREATED).send({ user, tokens });
 });
 
 const login = catchAsync(async (req, res) => {
@@ -30,7 +29,6 @@ const login = catchAsync(async (req, res) => {
   };
 
   res.send({ responseData });
-  res.send({ user, tokens });
 });
 
 const logout = catchAsync(async (req, res) => {

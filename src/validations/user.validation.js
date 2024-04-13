@@ -1,15 +1,20 @@
 const Joi = require('joi');
 const { password, objectId } = require('./custom.validation');
 
-const createUser = {
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().custom(password),
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
-    role: Joi.string().required().valid('user', 'admin'),
-  }),
-};
+const createUser = Joi.object({
+  email: Joi.string().required().email(),
+  password: Joi.string().required(),
+  firstname: Joi.string().required(),
+  lastname: Joi.string().required(),
+  phone: Joi.string().required(),
+  Address: Joi.object({
+    Country: Joi.string().required(),
+    City: Joi.string().required(),
+    Address: Joi.string().required(),
+    Street: Joi.string().required()
+  }).required(),
+  role: Joi.string().required().valid('user', 'admin')
+});
 
 const getUsers = {
   query: Joi.object().keys({
@@ -37,6 +42,8 @@ const updateUser = {
       password: Joi.string().custom(password),
       firstname: Joi.string(),
       lastname: Joi.string(),
+      phone: Joi.string().required(),
+      Address: Joi.string().required(),
     })
     .min(1),
 };
